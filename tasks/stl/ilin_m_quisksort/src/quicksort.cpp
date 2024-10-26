@@ -30,8 +30,8 @@ void swapElements(std::vector<int>::iterator a, std::vector<int>::iterator b) { 
 
 std::vector<int>::iterator partition(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
   // Choose the last element as the pivot
-  std::vector<int>::iterator pivot = end - 1;
-  std::vector<int>::iterator i = begin - 1;  // Index of smaller element
+  auto pivot = end - 1;
+  auto i = begin - 1;  // Index of smaller element
 
   for (std::vector<int>::iterator j = begin; j != end - 1; ++j) {
     // If current element is smaller than or equal to pivot
@@ -50,7 +50,7 @@ void ilin_m_quicksort_stl::quickSort(std::vector<int>::iterator begin, std::vect
   }
 
   // Partition the vector and get the pivot's final position
-  std::vector<int>::iterator pivot = partition(begin, end);
+  auto pivot = partition(begin, end);
 
   // Recursively sort the sub-vectors
   quickSort(begin, pivot);    // Sort elements before the pivot
@@ -61,7 +61,9 @@ std::vector<int> ilin_m_quicksort_stl::mergeVecs(std::vector<int> arr1, std::vec
   int n1 = static_cast<int>(arr1.size());
   int n2 = static_cast<int>(arr2.size());
 
-  int i = 0, j = 0, k = 0;
+  int i = 0;
+  int j = 0;
+  int k = 0;
 
   std::vector<int> arr3(n1 + n2);
 
@@ -82,14 +84,14 @@ void ilin_m_quicksort_stl::quickSortSimpleMerge(std::vector<int>* vec, int parts
   std::vector<std::vector<int>> vecs(parts);
   int grainsize = static_cast<int>((*vec).size()) / parts;
 
-  if (!grainsize) {
+  if (grainsize >= 1) {
     quickSort(vec->begin(), vec->end());
     return;
   }
 
   for (int i = 0; i < parts - 1; i++) {
-    std::vector<int>::const_iterator first = (*vec).begin() + grainsize * i;
-    std::vector<int>::const_iterator last = (*vec).begin() + grainsize * (i + 1);
+    auto first = (*vec).begin() + grainsize * i;
+    auto last = (*vec).begin() + grainsize * (i + 1);
 
     vecs[i] = std::vector<int>(first, last);
   }
