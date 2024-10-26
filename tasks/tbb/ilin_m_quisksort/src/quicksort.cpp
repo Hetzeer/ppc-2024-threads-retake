@@ -84,7 +84,7 @@ void ilin_m_quicksort_tbb::quickSortSimpleMerge(std::vector<int>* vec, int parts
   std::vector<std::vector<int>> vecs(parts);
   int grainsize = static_cast<int>((*vec).size()) / parts;
 
-  if (grainsize >= 1) {
+  if (grainsize < 1) {
     quickSort(vec->begin(), vec->end());
     return;
   }
