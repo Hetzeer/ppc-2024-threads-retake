@@ -1,8 +1,6 @@
 // Copyright 2024 Ilin Maksim
 #include "stl/ilin_m_quisksort/include/quicksort.hpp"
 
-#include <omp.h>
-
 #include <functional>
 #include <iterator>
 #include <thread>
@@ -100,7 +98,7 @@ void ilin_m_quicksort_stl::quickSortSimpleMerge(std::vector<int>* vec, int parts
   if (parallel) {
     std::vector<std::thread> threads;
     for (int i = 0; i < parts; i++) {
-      threads.push_back(std::thread([&vecs, i]() { quickSort(vecs[i].begin(), vecs[i].end()); }));
+      threads.emplace_back(std::thread([&vecs, i]() { quickSort(vecs[i].begin(), vecs[i].end()); }));
     }
     for (auto&& thread : threads) {
       thread.join();
@@ -170,7 +168,7 @@ bool ilin_m_quicksort_stl::QuisksortSTLTaskParallel::validation() {
 bool ilin_m_quicksort_stl::QuisksortSTLTaskParallel::run() {
   internal_order_test();
 
-  ilin_m_quicksort_stl::quickSortSimpleMerge(&input_, omp_get_max_threads());
+  ilin_m_quicksort_stl::quickSortSimpleMerge(&input_, std::thread::hardware_concurrency());
   return true;
 }
 
