@@ -34,7 +34,7 @@ std::vector<int>::iterator partition(std::vector<int>::iterator begin, std::vect
   auto pivot = end - 1;
   auto i = begin - 1;  // Index of smaller element
 
-  for (std::vector<int>::iterator j = begin; j != end - 1; ++j) {
+  for (auto j = begin; j != end - 1; ++j) {
     // If current element is smaller than or equal to pivot
     if (*j <= *pivot) {
       i++;                 // increment index of smaller element
