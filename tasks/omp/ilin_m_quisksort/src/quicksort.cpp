@@ -1,5 +1,7 @@
 // Copyright 2024 Ilin Maksim
-#include "seq/ilin_m_quisksort/include/quicksort.hpp"
+#include "omp/ilin_m_quisksort/include/quicksort.hpp"
+
+#include <omp.h>
 
 #include <functional>
 #include <iterator>
@@ -7,7 +9,7 @@
 
 using namespace std::chrono_literals;
 
-std::vector<int> ilin_m_quisksort_seq::getRandomVec(int n) {
+std::vector<int> ilin_m_quicksort_omp::getRandomVec(int n) {
   std::random_device dev;
   static std::mt19937 gen(dev());
   std::vector<int> vec(n);
@@ -15,7 +17,7 @@ std::vector<int> ilin_m_quisksort_seq::getRandomVec(int n) {
   return vec;
 }
 
-bool ilin_m_quisksort_seq::checkOrder(const std::vector<int>& vec) {
+bool ilin_m_quicksort_omp::checkOrder(const std::vector<int>& vec) {
   for (auto iter = vec.begin(); iter != std::prev(vec.end()); ++iter) {
     if (*iter > *(iter + 1)) {
       return false;
@@ -42,7 +44,7 @@ std::vector<int>::iterator partition(std::vector<int>::iterator begin, std::vect
   return i + 1;                // Return the iterator to the pivot's final position
 }
 
-void ilin_m_quisksort_seq::quickSort(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+void ilin_m_quicksort_omp::quickSort(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
   if (begin >= end - 1) {  // Base case: 0 or 1 element(s) in the range
     return;                // Already sorted
   }
@@ -55,7 +57,7 @@ void ilin_m_quisksort_seq::quickSort(std::vector<int>::iterator begin, std::vect
   quickSort(pivot + 1, end);  // Sort elements after the pivot
 }
 
-std::vector<int> ilin_m_quisksort_seq::mergeVecs(std::vector<int> arr1, std::vector<int> arr2) {
+std::vector<int> ilin_m_quicksort_omp::mergeVecs(std::vector<int> arr1, std::vector<int> arr2) {
   int n1 = static_cast<int>(arr1.size());
   int n2 = static_cast<int>(arr2.size());
 
@@ -76,7 +78,7 @@ std::vector<int> ilin_m_quisksort_seq::mergeVecs(std::vector<int> arr1, std::vec
   return arr3;
 }
 
-void ilin_m_quisksort_seq::quickSortSimpleMerge(std::vector<int>* vec, int parts) {
+void ilin_m_quicksort_omp::quickSortSimpleMerge(std::vector<int>* vec, int parts, bool parallel) {
   std::vector<std::vector<int>> vecs(parts);
   int grainsize = static_cast<int>((*vec).size()) / parts;
 
@@ -93,8 +95,15 @@ void ilin_m_quisksort_seq::quickSortSimpleMerge(std::vector<int>* vec, int parts
   }
   vecs.back() = std::vector<int>((*vec).begin() + grainsize * (parts - 1), (*vec).end());
 
-  for (auto&& elem : vecs) {
-    quickSort(elem.begin(), elem.end());
+  if (parallel) {
+#pragma omp parallel for
+    for (int i = 0; i < parts; i++) {
+      quickSort(vecs[i].begin(), vecs[i].end());
+    }
+  } else {
+    for (auto&& elem : vecs) {
+      quickSort(elem.begin(), elem.end());
+    }
   }
 
   (*vec) = vecs[0];
@@ -104,7 +113,7 @@ void ilin_m_quisksort_seq::quickSortSimpleMerge(std::vector<int>* vec, int parts
   }
 }
 
-bool ilin_m_quisksort_seq::QuisksortSequential::pre_processing() {
+bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::pre_processing() {
   internal_order_test();
   // Init value for input and output
 
@@ -115,15 +124,15 @@ bool ilin_m_quisksort_seq::QuisksortSequential::pre_processing() {
   return true;
 }
 
-bool ilin_m_quisksort_seq::QuisksortSequential::validation() {
+bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::validation() {
   internal_order_test();
   return taskData->inputs_count[0] == taskData->outputs_count[0];
 }
 
-bool ilin_m_quisksort_seq::QuisksortSequential::run() {
+bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::run() {
   internal_order_test();
 
-  ilin_m_quisksort_seq::quickSort(input_.begin(), input_.end());
+  ilin_m_quicksort_omp::quickSort(input_.begin(), input_.end());
   // for (auto el : res) {
   //   std::cout << el << "\n";
   // }
@@ -131,7 +140,36 @@ bool ilin_m_quisksort_seq::QuisksortSequential::run() {
   return true;
 }
 
-bool ilin_m_quisksort_seq::QuisksortSequential::post_processing() {
+bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::post_processing() {
+  internal_order_test();
+  std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
+  return true;
+}
+
+bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::pre_processing() {
+  internal_order_test();
+  // Init value for input and output
+
+  input_.reserve(taskData->inputs_count[0]);
+  std::copy(reinterpret_cast<int*>(taskData->inputs[0]),
+            reinterpret_cast<int*>(taskData->inputs[0]) + taskData->inputs_count[0], std::back_inserter(input_));
+
+  return true;
+}
+
+bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::validation() {
+  internal_order_test();
+  return taskData->inputs_count[0] == taskData->outputs_count[0];
+}
+
+bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::run() {
+  internal_order_test();
+
+  ilin_m_quicksort_omp::quickSortSimpleMerge(&input_, omp_get_max_threads());
+  return true;
+}
+
+bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::post_processing() {
   internal_order_test();
   std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
   return true;
