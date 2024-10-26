@@ -29,7 +29,7 @@ bool ilin_m_quicksort_omp::checkOrder(const std::vector<int>& vec) {
 void swapElements(std::vector<int>::iterator a, std::vector<int>::iterator b) { std::iter_swap(a, b); }
 
 std::vector<int>::iterator partition(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
-  // Choose the last element as the pivot
+  // Choose the last element as the pivot 123
   auto pivot = end - 1;
   auto i = begin - 1;  // Index of smaller element
 
