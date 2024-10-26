@@ -99,7 +99,7 @@ void ilin_m_quicksort_stl::quickSortSimpleMerge(std::vector<int>* vec, int parts
     std::vector<std::thread> threads;
     threads.reserve(parts);  // Pre-allocate capacity for 'parts' number of threads
     for (int i = 0; i < parts; i++) {
-      threads.emplace_back(std::thread([&vecs, i]() { quickSort(vecs[i].begin(), vecs[i].end()); }));
+      threads.emplace_back([&vecs, i]() { quickSort(vecs[i].begin(), vecs[i].end()); });
     }
     for (auto&& thread : threads) {
       thread.join();
