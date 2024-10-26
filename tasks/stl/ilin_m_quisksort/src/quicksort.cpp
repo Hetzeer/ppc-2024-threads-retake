@@ -82,7 +82,7 @@ void ilin_m_quicksort_stl::quickSortSimpleMerge(std::vector<int>* vec, int parts
   std::vector<std::vector<int>> vecs(parts);
   int grainsize = static_cast<int>((*vec).size()) / parts;
 
-  if (grainsize >= 1) {
+  if (grainsize <= 1) {
     quickSort(vec->begin(), vec->end());
     return;
   }
@@ -97,6 +97,7 @@ void ilin_m_quicksort_stl::quickSortSimpleMerge(std::vector<int>* vec, int parts
 
   if (parallel) {
     std::vector<std::thread> threads;
+    threads.reserve(parts); // Pre-allocate capacity for 'parts' number of threads
     for (int i = 0; i < parts; i++) {
       threads.emplace_back(std::thread([&vecs, i]() { quickSort(vecs[i].begin(), vecs[i].end()); }));
     }
