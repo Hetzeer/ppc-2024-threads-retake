@@ -215,6 +215,8 @@ TEST(ilin_m_quicksort_stl, Sort_Vec_50000) {
   ASSERT_TRUE(ilin_m_quicksort_stl::checkOrder(seq_out));
   ASSERT_TRUE(ilin_m_quicksort_stl::checkOrder(par_out));
 
-  std::cout << "Seq    time [µs]: " << std::chrono::duration_cast<std::chrono::microseconds>(end_seq - begin_seq).count() << std::endl;
-  std::cout << "OpenMP time [µs]: " << std::chrono::duration_cast<std::chrono::microseconds>(end_par - begin_par).count() << std::endl;
+  std::cout << "Seq    time [µs]: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end_seq - begin_seq).count() << std::endl;
+  std::cout << "OpenMP time [µs]: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end_par - begin_par).count() << std::endl;
 }
