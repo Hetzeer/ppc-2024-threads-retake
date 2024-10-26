@@ -191,7 +191,7 @@ TEST(ilin_m_quicksort_stl, Sort_Vec_50000) {
   double start_seq = omp_get_wtime();
   testTaskSequential.run();
   double finish_seq = omp_get_wtime();
-  
+
   testTaskSequential.post_processing();
 
   // Create TaskData

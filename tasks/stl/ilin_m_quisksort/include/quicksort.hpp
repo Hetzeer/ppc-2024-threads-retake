@@ -40,4 +40,4 @@ class QuisksortSTLTaskParallel : public ppc::core::Task {
   std::vector<int> input_{};
 };
 
-}  // namespace ilin_m_quisksort_stl
+}  // namespace ilin_m_quicksort_stl
