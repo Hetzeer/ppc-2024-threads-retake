@@ -1,7 +1,6 @@
 // Copyright 2024 Ilin Maksim
 #include "tbb/ilin_m_quisksort/include/quicksort.hpp"
 
-#include <omp.h>
 #include <tbb/tbb.h>
 
 #include <functional>
@@ -169,7 +168,7 @@ bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::validation() {
 bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::run() {
   internal_order_test();
 
-  ilin_m_quicksort_tbb::quickSortSimpleMerge(&input_, omp_get_max_threads());
+  ilin_m_quicksort_tbb::quickSortSimpleMerge(&input_, std::thread::hardware_concurrency());
   return true;
 }
 

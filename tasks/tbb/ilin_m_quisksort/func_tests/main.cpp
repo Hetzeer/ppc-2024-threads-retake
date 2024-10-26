@@ -1,7 +1,7 @@
 // Copyright 2024 Ilin Maksim
 #include <gtest/gtest.h>
-#include <omp.h>
 
+#include <chrono>
 #include <vector>
 
 #include "tbb/ilin_m_quisksort/include/quicksort.hpp"
@@ -188,9 +188,9 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_50000) {
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
 
-  double start_seq = omp_get_wtime();
+  std::chrono::steady_clock::time_point begin_seq = std::chrono::steady_clock::now();
   testTaskSequential.run();
-  double finish_seq = omp_get_wtime();
+  std::chrono::steady_clock::time_point end_seq = std::chrono::steady_clock::now();
 
   testTaskSequential.post_processing();
 
@@ -206,15 +206,17 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_50000) {
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
 
-  double start_par = omp_get_wtime();
+  std::chrono::steady_clock::time_point begin_par = std::chrono::steady_clock::now();
   testTaskParallel.run();
-  double finish_par = omp_get_wtime();
+  std::chrono::steady_clock::time_point end_par = std::chrono::steady_clock::now();
 
   testTaskParallel.post_processing();
 
   ASSERT_TRUE(ilin_m_quicksort_tbb::checkOrder(seq_out));
   ASSERT_TRUE(ilin_m_quicksort_tbb::checkOrder(par_out));
 
-  std::cout << "Seq    time: " << finish_seq - start_seq << std::endl;
-  std::cout << "OpenMP time: " << finish_par - start_par << std::endl;
+  std::cout << "Seq    time [µs]: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end_seq - begin_seq).count() << std::endl;
+  std::cout << "OpenMP time [µs]: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end_par - begin_par).count() << std::endl;
 }
