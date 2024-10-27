@@ -3,13 +3,13 @@
 
 #include <vector>
 
-#include "seq/ilin_m_quisksort/include/quicksort.hpp"
+#include "seq/ilin_m_quicksort/include/quicksort.hpp"
 
 TEST(ilin_m_quicksort_seq, Sort_Vec_10) {
   const int count = 10;
 
   // Create data
-  std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   std::vector<int> out(count, 0);
 
   // Create TaskData
@@ -20,20 +20,20 @@ TEST(ilin_m_quicksort_seq, Sort_Vec_10) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  ilin_m_quisksort_seq::QuisksortSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_seq::QuicksortSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
   testTaskSequential.post_processing();
 
-  ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 TEST(ilin_m_quicksort_seq, Sort_Vec_20) {
   const int count = 20;
 
   // Create data
-  std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   std::vector<int> out(count, 0);
 
   // Create TaskData
@@ -44,20 +44,20 @@ TEST(ilin_m_quicksort_seq, Sort_Vec_20) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  ilin_m_quisksort_seq::QuisksortSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_seq::QuicksortSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
   testTaskSequential.post_processing();
 
-  ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 TEST(ilin_m_quicksort_seq, Sort_Vec_100) {
   const int count = 100;
 
   // Create data
-  std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   std::vector<int> out(count, 0);
 
   // Create TaskData
@@ -68,20 +68,20 @@ TEST(ilin_m_quicksort_seq, Sort_Vec_100) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  ilin_m_quisksort_seq::QuisksortSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_seq::QuicksortSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
   testTaskSequential.post_processing();
 
-  ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 TEST(ilin_m_quicksort_seq, Sort_Vec_500) {
   const int count = 500;
 
   // Create data
-  std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   std::vector<int> out(count, 0);
 
   // Create TaskData
@@ -92,20 +92,20 @@ TEST(ilin_m_quicksort_seq, Sort_Vec_500) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  ilin_m_quisksort_seq::QuisksortSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_seq::QuicksortSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
   testTaskSequential.post_processing();
 
-  ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 TEST(ilin_m_quicksort_seq, Sort_Vec_1000) {
   const int count = 1000;
 
   // Create data
-  std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   std::vector<int> out(count, 0);
 
   // Create TaskData
@@ -116,11 +116,11 @@ TEST(ilin_m_quicksort_seq, Sort_Vec_1000) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  ilin_m_quisksort_seq::QuisksortSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_seq::QuicksortSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
   testTaskSequential.post_processing();
 
-  ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }

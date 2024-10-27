@@ -8,7 +8,7 @@
 
 #include "core/task/include/task.hpp"
 
-namespace ilin_m_quisksort_seq {
+namespace ilin_m_quicksort_seq {
 
 std::vector<int> getRandomVec(int n);
 bool checkOrder(const std::vector<int>& vec);
@@ -16,9 +16,9 @@ void quickSort(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 std::vector<int> mergeVecs(std::vector<int> arr1, std::vector<int> arr2);
 void quickSortSimpleMerge(std::vector<int>* vec, int parts);
 
-class QuisksortSequential : public ppc::core::Task {
+class QuicksortSequential : public ppc::core::Task {
  public:
-  explicit QuisksortSequential(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
+  explicit QuicksortSequential(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
   bool pre_processing() override;
   bool validation() override;
   bool run() override;
@@ -28,4 +28,4 @@ class QuisksortSequential : public ppc::core::Task {
   std::vector<int> input_{};
 };
 
-}  // namespace ilin_m_quisksort_seq
+}  // namespace ilin_m_quicksort_seq
