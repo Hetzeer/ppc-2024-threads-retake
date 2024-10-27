@@ -1,5 +1,5 @@
 // Copyright 2024 Ilin Maksim
-#include "omp/ilin_m_quisksort/include/quicksort.hpp"
+#include "omp/ilin_m_quicksort/include/quicksort.hpp"
 
 #include <omp.h>
 
@@ -115,7 +115,7 @@ void ilin_m_quicksort_omp::quickSortSimpleMerge(std::vector<int>* vec, int parts
   }
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::pre_processing() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskSequential::pre_processing() {
   internal_order_test();
   // Init value for input and output
 
@@ -126,12 +126,12 @@ bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::pre_processing() {
   return true;
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::validation() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskSequential::validation() {
   internal_order_test();
   return taskData->inputs_count[0] == taskData->outputs_count[0];
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::run() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskSequential::run() {
   internal_order_test();
 
   ilin_m_quicksort_omp::quickSort(input_.begin(), input_.end());
@@ -142,13 +142,13 @@ bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::run() {
   return true;
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskSequential::post_processing() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskSequential::post_processing() {
   internal_order_test();
   std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
   return true;
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::pre_processing() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskParallel::pre_processing() {
   internal_order_test();
   // Init value for input and output
 
@@ -159,19 +159,19 @@ bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::pre_processing() {
   return true;
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::validation() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskParallel::validation() {
   internal_order_test();
   return taskData->inputs_count[0] == taskData->outputs_count[0];
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::run() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskParallel::run() {
   internal_order_test();
 
   ilin_m_quicksort_omp::quickSortSimpleMerge(&input_, omp_get_max_threads());
   return true;
 }
 
-bool ilin_m_quicksort_omp::QuisksortOMPTaskParallel::post_processing() {
+bool ilin_m_quicksort_omp::QuicksortOMPTaskParallel::post_processing() {
   internal_order_test();
   std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
   return true;
