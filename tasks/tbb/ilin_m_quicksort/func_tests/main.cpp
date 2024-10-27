@@ -4,7 +4,7 @@
 #include <chrono>
 #include <vector>
 
-#include "tbb/ilin_m_quisksort/include/quicksort.hpp"
+#include "tbb/ilin_m_quicksort/include/quicksort.hpp"
 
 TEST(ilin_m_quicksort_tbb, Sort_Vec_10) {
   const int count = 10;
@@ -22,7 +22,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_10) {
   taskDataSeq->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
@@ -36,7 +36,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_10) {
   taskDataPar->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskParallel testTaskParallel(taskDataPar);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskParallel testTaskParallel(taskDataPar);
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
   testTaskParallel.run();
@@ -62,7 +62,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_100) {
   taskDataSeq->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
@@ -76,7 +76,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_100) {
   taskDataPar->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskParallel testTaskParallel(taskDataPar);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskParallel testTaskParallel(taskDataPar);
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
   testTaskParallel.run();
@@ -102,7 +102,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_1000) {
   taskDataSeq->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
@@ -116,7 +116,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_1000) {
   taskDataPar->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskParallel testTaskParallel(taskDataPar);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskParallel testTaskParallel(taskDataPar);
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
   testTaskParallel.run();
@@ -142,7 +142,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_10000) {
   taskDataSeq->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
   testTaskSequential.run();
@@ -156,7 +156,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_10000) {
   taskDataPar->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskParallel testTaskParallel(taskDataPar);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskParallel testTaskParallel(taskDataPar);
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
   testTaskParallel.run();
@@ -184,7 +184,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_50000) {
   taskDataSeq->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskSequential testTaskSequential(taskDataSeq);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskSequential testTaskSequential(taskDataSeq);
   ASSERT_EQ(testTaskSequential.validation(), true);
   testTaskSequential.pre_processing();
 
@@ -202,7 +202,7 @@ TEST(ilin_m_quicksort_tbb, Sort_Vec_50000) {
   taskDataPar->outputs_count.emplace_back(seq_out.size());
 
   // Create Task
-  ilin_m_quicksort_tbb::QuisksortTBBTaskParallel testTaskParallel(taskDataPar);
+  ilin_m_quicksort_tbb::QuicksortTBBTaskParallel testTaskParallel(taskDataPar);
   ASSERT_EQ(testTaskParallel.validation(), true);
   testTaskParallel.pre_processing();
 

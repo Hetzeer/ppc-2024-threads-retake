@@ -4,13 +4,13 @@
 #include <vector>
 
 #include "core/perf/include/perf.hpp"
-#include "tbb/ilin_m_quisksort/include/quicksort.hpp"
+#include "tbb/ilin_m_quicksort/include/quicksort.hpp"
 
 TEST(tbb_ilin_m_quicksort_perf, test_pipeline_run) {
   // const int count = 1000;
 
   // // Create data
-  // std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  // std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   // std::vector<int> out(count, 0);
 
   // // Create TaskData
@@ -21,7 +21,7 @@ TEST(tbb_ilin_m_quicksort_perf, test_pipeline_run) {
   // taskDataSeq->outputs_count.emplace_back(out.size());
 
   // // Create Task
-  // auto testTaskSequential = std::make_shared<ilin_m_quisksort_seq::QuisksortSequential>(taskDataSeq);
+  // auto testTaskSequential = std::make_shared<ilin_m_quicksort_seq::QuicksortSequential>(taskDataSeq);
 
   // // Create Perf attributes
   // auto perfAttr = std::make_shared<ppc::core::PerfAttr>();
@@ -40,14 +40,14 @@ TEST(tbb_ilin_m_quicksort_perf, test_pipeline_run) {
   // auto perfAnalyzer = std::make_shared<ppc::core::Perf>(testTaskSequential);
   // perfAnalyzer->pipeline_run(perfAttr, perfResults);
   // ppc::core::Perf::print_perf_statistic(perfResults);
-  // ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  // ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 TEST(tbb_ilin_m_quicksort_perf, test_task_run) {
   // const int count = 1000;
 
   // // Create data
-  // std::vector<int> in = ilin_m_quisksort_seq::getRandomVec(count);
+  // std::vector<int> in = ilin_m_quicksort_seq::getRandomVec(count);
   // std::vector<int> out(count, 0);
 
   // // Create TaskData
@@ -58,7 +58,7 @@ TEST(tbb_ilin_m_quicksort_perf, test_task_run) {
   // taskDataSeq->outputs_count.emplace_back(out.size());
 
   // // Create Task
-  // auto testTaskSequential = std::make_shared<ilin_m_quisksort_seq::QuisksortSequential>(taskDataSeq);
+  // auto testTaskSequential = std::make_shared<ilin_m_quicksort_seq::QuicksortSequential>(taskDataSeq);
 
   // // Create Perf attributes
   // auto perfAttr = std::make_shared<ppc::core::PerfAttr>();
@@ -77,7 +77,7 @@ TEST(tbb_ilin_m_quicksort_perf, test_task_run) {
   // auto perfAnalyzer = std::make_shared<ppc::core::Perf>(testTaskSequential);
   // perfAnalyzer->task_run(perfAttr, perfResults);
   // ppc::core::Perf::print_perf_statistic(perfResults);
-  // ASSERT_TRUE(ilin_m_quisksort_seq::checkOrder(out));
+  // ASSERT_TRUE(ilin_m_quicksort_seq::checkOrder(out));
 }
 
 // int main(int argc, char **argv) {

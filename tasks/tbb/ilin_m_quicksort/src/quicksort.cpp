@@ -1,5 +1,5 @@
 // Copyright 2024 Ilin Maksim
-#include "tbb/ilin_m_quisksort/include/quicksort.hpp"
+#include "tbb/ilin_m_quicksort/include/quicksort.hpp"
 
 #include <tbb/tbb.h>
 
@@ -116,7 +116,7 @@ void ilin_m_quicksort_tbb::quickSortSimpleMerge(std::vector<int>* vec, int parts
   }
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::pre_processing() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskSequential::pre_processing() {
   internal_order_test();
   // Init value for input and output
 
@@ -127,12 +127,12 @@ bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::pre_processing() {
   return true;
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::validation() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskSequential::validation() {
   internal_order_test();
   return taskData->inputs_count[0] == taskData->outputs_count[0];
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::run() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskSequential::run() {
   internal_order_test();
 
   ilin_m_quicksort_tbb::quickSort(input_.begin(), input_.end());
@@ -143,13 +143,13 @@ bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::run() {
   return true;
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskSequential::post_processing() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskSequential::post_processing() {
   internal_order_test();
   std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
   return true;
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::pre_processing() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskParallel::pre_processing() {
   internal_order_test();
   // Init value for input and output
 
@@ -160,19 +160,19 @@ bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::pre_processing() {
   return true;
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::validation() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskParallel::validation() {
   internal_order_test();
   return taskData->inputs_count[0] == taskData->outputs_count[0];
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::run() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskParallel::run() {
   internal_order_test();
 
   ilin_m_quicksort_tbb::quickSortSimpleMerge(&input_, std::thread::hardware_concurrency());
   return true;
 }
 
-bool ilin_m_quicksort_tbb::QuisksortTBBTaskParallel::post_processing() {
+bool ilin_m_quicksort_tbb::QuicksortTBBTaskParallel::post_processing() {
   internal_order_test();
   std::copy(input_.begin(), input_.end(), reinterpret_cast<int*>(taskData->outputs[0]));
   return true;
