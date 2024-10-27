@@ -16,9 +16,9 @@ void quickSort(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 std::vector<int> mergeVecs(std::vector<int> arr1, std::vector<int> arr2);
 void quickSortSimpleMerge(std::vector<int>* vec, int parts, bool parallel = true);
 
-class QuisksortSTLTaskSequential : public ppc::core::Task {
+class QuicksortSTLTaskSequential : public ppc::core::Task {
  public:
-  explicit QuisksortSTLTaskSequential(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
+  explicit QuicksortSTLTaskSequential(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
   bool pre_processing() override;
   bool validation() override;
   bool run() override;
@@ -28,9 +28,9 @@ class QuisksortSTLTaskSequential : public ppc::core::Task {
   std::vector<int> input_{};
 };
 
-class QuisksortSTLTaskParallel : public ppc::core::Task {
+class QuicksortSTLTaskParallel : public ppc::core::Task {
  public:
-  explicit QuisksortSTLTaskParallel(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
+  explicit QuicksortSTLTaskParallel(std::shared_ptr<ppc::core::TaskData> taskData_) : Task(std::move(taskData_)) {}
   bool pre_processing() override;
   bool validation() override;
   bool run() override;
